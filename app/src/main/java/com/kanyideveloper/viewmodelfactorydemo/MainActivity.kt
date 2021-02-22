@@ -2,12 +2,15 @@ package com.kanyideveloper.viewmodelfactorydemo
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.kanyideveloper.viewmodelfactorydemo.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
+
+    private val TAG = "MainActivity"
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var name: String
@@ -25,6 +28,8 @@ class MainActivity : AppCompatActivity() {
 
                 val viewModelFactory = MainViewModelFactory(name)
                 val viewModel = ViewModelProvider(this,viewModelFactory).get(MainViewModel::class.java)
+
+                binding.nicknameTxt.text = viewModel.helloName.value
 
             }else{
                 Toast.makeText(this,"Enter a nickname",Toast.LENGTH_SHORT).show()
